@@ -12,15 +12,6 @@ plugins:
 functions:
   detailLocation:
     handler: src/services/detailLocation.detailLocation
-    environment:
-      GOOGLE_API_KEY: AIzaSyDL9LEVyiiZF7rZOy6wRgRiKrdzva_hVmg
-      GOOGLE_API_BASE_URL: https://maps.googleapis.com/maps/api
-      DB_USER: postgres
-      DB_PASS: gJRUConTfYUvW1OW6mVk
-      DB_NAME: geo_pin_hml
-      DB_DIALECT: postgres
-      DB_PORT: 5432
-      DB_HOST: geo-pin-instance.cucj61bznarn.us-east-1.rds.amazonaws.com
     events:
       - http:
           path: detail-location/{id}
