@@ -1,0 +1,92 @@
+service: geo-pins-backend
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+plugins:
+  - serverless-offline
+
+functions:
+  detailLocation:
+    handler: src/services/detailLocation.detailLocation
+    environment:
+      GOOGLE_API_KEY: AIzaSyDL9LEVyiiZF7rZOy6wRgRiKrdzva_hVmg
+      GOOGLE_API_BASE_URL: https://maps.googleapis.com/maps/api
+      DB_USER: postgres
+      DB_PASS: gJRUConTfYUvW1OW6mVk
+      DB_NAME: geo_pin_hml
+      DB_DIALECT: postgres
+      DB_PORT: 5432
+      DB_HOST: geo-pin-instance.cucj61bznarn.us-east-1.rds.amazonaws.com
+    events:
+      - http:
+          path: detail-location/{id}
+          method: get
+          cors: true
+  createPlan:
+    handler: src/services/createPlan.createPlan
+    environment:
+      GOOGLE_API_KEY: AIzaSyDL9LEVyiiZF7rZOy6wRgRiKrdzva_hVmg
+      GOOGLE_API_BASE_URL: https://maps.googleapis.com/maps/api
+      DB_USER: postgres
+      DB_PASS: gJRUConTfYUvW1OW6mVk
+      DB_NAME: geo_pin_hml
+      DB_DIALECT: postgres
+      DB_PORT: 5432
+      DB_HOST: geo-pin-instance.cucj61bznarn.us-east-1.rds.amazonaws.com
+    events:
+      - http:
+          path: plans
+          method: post
+          cors: true
+  createPins:
+    handler: src/services/createPins.createPins
+    environment:
+      GOOGLE_API_KEY: AIzaSyDL9LEVyiiZF7rZOy6wRgRiKrdzva_hVmg
+      GOOGLE_API_BASE_URL: https://maps.googleapis.com/maps/api
+      DB_USER: postgres
+      DB_PASS: gJRUConTfYUvW1OW6mVk
+      DB_NAME: geo_pin_hml
+      DB_DIALECT: postgres
+      DB_PORT: 5432
+      DB_HOST: geo-pin-instance.cucj61bznarn.us-east-1.rds.amazonaws.com
+    events:
+      - http:
+          path: plans/{id}/pins
+          method: post
+          cors: true
+  detailPlan:
+    handler: src/services/detailPlan.detailPlan
+    environment:
+      GOOGLE_API_KEY: AIzaSyDL9LEVyiiZF7rZOy6wRgRiKrdzva_hVmg
+      GOOGLE_API_BASE_URL: https://maps.googleapis.com/maps/api
+      DB_USER: postgres
+      DB_PASS: gJRUConTfYUvW1OW6mVk
+      DB_NAME: geo_pin_hml
+      DB_DIALECT: postgres
+      DB_PORT: 5432
+      DB_HOST: geo-pin-instance.cucj61bznarn.us-east-1.rds.amazonaws.com
+    events:
+      - http:
+          path: plans/{id}
+          method: get
+          cors: true
+  postRoutes:
+    handler: src/services/getRoutes.getRoutes
+    environment:
+      GOOGLE_API_KEY: AIzaSyDL9LEVyiiZF7rZOy6wRgRiKrdzva_hVmg
+      GOOGLE_API_BASE_URL: https://maps.googleapis.com/maps/api
+      DB_USER: postgres
+      DB_PASS: gJRUConTfYUvW1OW6mVk
+      DB_NAME: geo_pin_hml
+      DB_DIALECT: postgres
+      DB_PORT: 5432
+      DB_HOST: geo-pin-instance.cucj61bznarn.us-east-1.rds.amazonaws.com
+    events:
+      - http:
+          path: routes
+          method: post
+          cors: true
